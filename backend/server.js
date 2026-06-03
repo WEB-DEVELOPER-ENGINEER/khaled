@@ -4,6 +4,8 @@ const path = require('path');
 const cors = require('cors');
 const fileUpload = require('express-fileupload');
 const connectDB = require('./config/db');
+const swaggerUi = require('swagger-ui-express');
+const swaggerDocument = require('./swagger.json');
 
 // Load environment variables from the project root .env
 dotenv.config({ path: path.resolve(__dirname, '..', '.env') });
@@ -22,6 +24,9 @@ app.use(fileUpload({
   useTempFiles: true,
   tempFileDir: '/tmp/'
 }));
+
+// API Documentation
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 // Routes
 app.use('/api/auth', require('./routes/auth')); // Email verification enabled

@@ -1,0 +1,180 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Sign2GPT API",
+    "version": "1.0.0",
+    "description": "API documentation for the Sign2GPT Backend"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:5000",
+      "description": "Local server"
+    }
+  ],
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    }
+  },
+  "paths": {
+    "/health": {
+      "get": {
+        "summary": "Health check",
+        "tags": ["System"],
+        "responses": {
+          "200": {
+            "description": "Server is running"
+          }
+        }
+      }
+    },
+    "/api/auth/signup": {
+      "post": {
+        "summary": "Register user",
+        "tags": ["Auth"],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": { "type": "string" },
+                  "password": { "type": "string" }
+                }
+              }
+            }
+          }
+        },
+        "responses": { "201": { "description": "Created" } }
+      }
+    },
+    "/api/auth/verify/{token}": {
+      "get": {
+        "summary": "Verify email",
+        "tags": ["Auth"],
+        "parameters": [
+          { "name": "token", "in": "path", "required": true, "schema": { "type": "string" } }
+        ],
+        "responses": { "200": { "description": "Verified" } }
+      }
+    },
+    "/api/auth/login": {
+      "post": {
+        "summary": "Login user",
+        "tags": ["Auth"],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": { "type": "string" },
+                  "password": { "type": "string" }
+                }
+              }
+            }
+          }
+        },
+        "responses": { "200": { "description": "Logged in" } }
+      }
+    },
+    "/api/levels": {
+      "get": {
+        "summary": "Get all levels",
+        "tags": ["Levels"],
+        "security": [{ "bearerAuth": [] }],
+        "responses": { "200": { "description": "List of levels" } }
+      }
+    },
+    "/api/levels/{levelId}": {
+      "get": {
+        "summary": "Get level words",
+        "tags": ["Levels"],
+        "security": [{ "bearerAuth": [] }],
+        "parameters": [
+          { "name": "levelId", "in": "path", "required": true, "schema": { "type": "string" } }
+        ],
+        "responses": { "200": { "description": "Words for level" } }
+      }
+    },
+    "/api/submissions/verify": {
+      "post": {
+        "summary": "Verify sign attempt",
+        "tags": ["Submissions"],
+        "security": [{ "bearerAuth": [] }],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "video": { "type": "string", "format": "binary" },
+                  "expectedWord": { "type": "string" }
+                }
+              }
+            }
+          }
+        },
+        "responses": { "200": { "description": "Verification result" } }
+      }
+    },
+    "/api/submissions/classes": {
+      "get": {
+        "summary": "Get supported AI classes",
+        "tags": ["Submissions"],
+        "security": [{ "bearerAuth": [] }],
+        "responses": { "200": { "description": "List of classes" } }
+      }
+    },
+    "/api/submissions/predict": {
+      "post": {
+        "summary": "Free-form prediction (English)",
+        "tags": ["Submissions"],
+        "security": [{ "bearerAuth": [] }],
+        "parameters": [
+          { "name": "top_k", "in": "query", "schema": { "type": "integer", "default": 5 } }
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "video": { "type": "string", "format": "binary" }
+                }
+              }
+            }
+          }
+        },
+        "responses": { "200": { "description": "Predictions" } }
+      }
+    },
+    "/api/submissions/predict-ar": {
+      "post": {
+        "summary": "Free-form prediction (Arabic)",
+        "tags": ["Submissions"],
+        "security": [{ "bearerAuth": [] }],
+        "parameters": [
+          { "name": "top_k", "in": "query", "schema": { "type": "integer", "default": 5 } }
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "video": { "type": "string", "format": "binary" }
+                }
+              }
+            }
+          }
+        },
+        "responses": { "200": { "description": "Predictions in Arabic" } }
+      }
+    }
+  }
+}
