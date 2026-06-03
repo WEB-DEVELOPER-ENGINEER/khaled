@@ -26,6 +26,30 @@ router.get('/', protect, (req, res) => {
   }
 });
 
+// @route   GET /api/levels/all
+// @desc    Get all levels along with their associated words and videos
+router.get('/all', protect, (req, res) => {
+  try {
+    const levels = Object.keys(levelsData.language_letter).map(levelKey => ({
+      id: levelKey,
+      name: levelKey,
+      wordCount: levelsData.language_letter[levelKey].length,
+      words: levelsData.language_letter[levelKey]
+    }));
+
+    res.json({
+      success: true,
+      levels
+    });
+  } catch (error) {
+    console.error('Error fetching all detailed levels:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Error fetching detailed levels'
+    });
+  }
+});
+
 // @route   GET /api/levels/:levelId
 // @desc    Get words for a specific level
 router.get('/:levelId', protect, (req, res) => {

@@ -27,8 +27,8 @@ const sendEmail = async (options) => {
       socketTimeout: 10000 // 10 seconds
     });
 
-    const fromName = process.env.EMAIL_FROM || 'Sign2GPT';
-    const fromAddress = process.env.EMAIL_FROM_ADDRESS || 'onboarding@resend.dev';
+    const fromName = process.env.EMAIL_FROM_NAME || 'Sign2GPT';
+    const fromAddress = process.env.EMAIL_FROM || 'onboarding@resend.dev';
     const message = {
       from: `${fromName} <${fromAddress}>`,
       to: options.email,

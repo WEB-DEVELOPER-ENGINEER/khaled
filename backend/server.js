@@ -25,6 +25,17 @@ app.use(fileUpload({
   tempFileDir: '/tmp/'
 }));
 
+// Error handling middleware for invalid JSON
+app.use((err, req, res, next) => {
+  if (err instanceof SyntaxError && err.status === 400 && 'body' in err) {
+    return res.status(400).json({
+      success: false,
+      message: 'Invalid JSON payload format.'
+    });
+  }
+  next(err);
+});
+
 // API Documentation
 app.use('/api/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 

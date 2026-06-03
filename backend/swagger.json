@@ -94,6 +94,14 @@
         "responses": { "200": { "description": "List of levels" } }
       }
     },
+    "/api/levels/all": {
+      "get": {
+        "summary": "Get all levels with their words and videos",
+        "tags": ["Levels"],
+        "security": [{ "bearerAuth": [] }],
+        "responses": { "200": { "description": "List of all levels and their content" } }
+      }
+    },
     "/api/levels/{levelId}": {
       "get": {
         "summary": "Get level words",
