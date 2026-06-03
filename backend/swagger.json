@@ -7,6 +7,10 @@
   },
   "servers": [
     {
+      "url": "http://91.108.113.135",
+      "description": "Production server"
+    },
+    {
       "url": "http://localhost:5000",
       "description": "Local server"
     }
