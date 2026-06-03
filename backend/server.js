@@ -43,6 +43,8 @@ app.use('/api/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 app.use('/api/auth', require('./routes/auth')); // Email verification enabled
 app.use('/api/levels', require('./routes/levels'));
 app.use('/api/submissions', require('./routes/submissions'));
+app.use('/', require('./routes/chatbot'));
+app.use('/api', require('./routes/chatbot'));
 
 // Health check
 app.get('/health', (req, res) => {
