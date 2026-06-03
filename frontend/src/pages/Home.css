@@ -1,0 +1,138 @@
+.home-container {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.home-header {
+  background: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px 0;
+}
+
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.home-header h1 {
+  font-size: 24px;
+  color: var(--primary);
+  margin: 0;
+}
+
+.btn-logout {
+  padding: 10px 20px;
+  background: transparent;
+  border: 2px solid var(--primary);
+  color: var(--primary);
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-logout:hover {
+  background: var(--primary);
+  color: white;
+}
+
+.home-main {
+  padding: 60px 0;
+}
+
+.welcome-section {
+  text-align: center;
+  margin-bottom: 48px;
+  color: white;
+}
+
+.welcome-section h2 {
+  font-size: 36px;
+  margin-bottom: 12px;
+}
+
+.welcome-section p {
+  font-size: 18px;
+  opacity: 0.9;
+}
+
+.levels-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 24px;
+}
+
+.level-card {
+  background: white;
+  border-radius: 16px;
+  padding: 32px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.level-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--primary), var(--secondary));
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
+}
+
+.level-card:hover::before {
+  transform: scaleX(1);
+}
+
+.level-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+}
+
+.level-icon {
+  font-size: 48px;
+  margin-bottom: 16px;
+}
+
+.level-card h3 {
+  font-size: 24px;
+  color: var(--text-dark);
+  margin-bottom: 8px;
+}
+
+.level-card p {
+  color: var(--text-light);
+  font-size: 14px;
+}
+
+.level-arrow {
+  font-size: 24px;
+  color: var(--primary);
+  margin-top: 16px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.level-card:hover .level-arrow {
+  opacity: 1;
+}
+
+.loading-state {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: white;
+}
+
+.loading-state p {
+  margin-top: 16px;
+  font-size: 18px;
+}
